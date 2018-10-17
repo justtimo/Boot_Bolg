@@ -31,6 +31,7 @@ public class UserController {
         model.addAttribute("userList",userRepository.listUsers());
         model.addAttribute("title","用户管理");
         return new ModelAndView("users/list","userModel",model);
+
     }
 
     /**
