@@ -10,24 +10,35 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
-public class UserRepositoryImpl  implements UserRepository{
+public class UserRepositoryImpl implements UserRepository {
     //存储用户数据
-    private final ConcurrentMap<Long,User> userMap=new ConcurrentHashMap<>();
+    private final ConcurrentMap<Long, User> userMap = new ConcurrentHashMap<>();
     //标识用户id，每增加一个user，counter会自增
-    private static AtomicLong counter=new AtomicLong();
+    private static AtomicLong counter = new AtomicLong();
+
+    public UserRepositoryImpl() {
+        User user = new User();
+        user.setName("吴丙寅");
+        user.setId(30l);
+        user.setAge("20");
+        this.saveOrUpdateUSer(user);
+
+    }
+
     @Override
     public User saveOrUpdateUSer(User user) {
-        Long id=user.getId();
-        if (id==null){//id不存在，新建用户，save
-            id=counter.incrementAndGet();
+        Long id = user.getId();
+        if (id <= 0) {//id不存在，新建用户，save
+            id = counter.incrementAndGet();
             user.setId(id);
         }
-        this.userMap.put(id,user);
+        this.userMap.put(id, user);
         return user;
     }
 
     @Override
     public void deleteUser(Long id) {
+
         this.userMap.remove(id);
     }
 
@@ -38,7 +49,8 @@ public class UserRepositoryImpl  implements UserRepository{
     }
 
     @Override
-    public List<User> listUsers() {
-        return new ArrayList<User>(this.userMap.values()) ;
+    public List<User> listUser() {
+
+        return new ArrayList<User>(this.userMap.values());
     }
 }

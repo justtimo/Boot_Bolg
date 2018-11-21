@@ -19,10 +19,10 @@ public class HelloControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void hello() throws Exception{
+    public void hello() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/hello")
                 .accept(MediaType.APPLICATION_JSON))
-           ;
+        ;
 
     }
 }
