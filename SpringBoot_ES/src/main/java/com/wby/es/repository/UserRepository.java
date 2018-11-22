@@ -1,9 +1,7 @@
-package com.wby.jpa.repository;
+package com.wby.es.repository;
 
-import com.example.demo.domain.User;
+import com.wby.es.domain.User;
 import org.springframework.data.repository.CrudRepository;
-
-import java.util.List;
 
 public interface UserRepository extends CrudRepository<User, Long> {
 
